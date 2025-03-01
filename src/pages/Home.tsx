@@ -79,10 +79,12 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   const [scale, setScale] = useState(1);
   const [showNavbar, setShowNavbar] = useState(false);
+  // check for type of device
+  let scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY * scrollFactor;
       const maxScroll = window.innerHeight * 1.5; // Max scroll height before stopping
       // Scale (Zoom-out effect, shrinks more now)
       const newScale = Math.max(0.3, 1 - scrollY / (maxScroll * 0.7));
@@ -90,7 +92,7 @@ export default function Home() {
       setScale(newScale);
 
       // Show navbar when max scroll is reached
-      if (scrollY >= maxScroll - 700) {
+      if (scrollY >= maxScroll - 800) {
         setShowNavbar(true);
       } else {
         setShowNavbar(false);
@@ -106,10 +108,12 @@ export default function Home() {
     <>
       {/* Navbar Component */}
       <Navbar showNavbar={showNavbar} />
-      <div className="relative w-screen min-h-[150vh] bg-[#4d4d4d] overflow-hidden">
+      <div
+        className={`relative min-h-[100vh] w-screen overflow-hidden bg-[#4d4d4d]`}
+      >
         {/* Falling Lines Background */}
         <FallingBackground scrollY={scrollY * 0.5} />
-        <div className="fixed inset-0 bg-black opacity-50 z-0"></div>
+        <div className="fixed inset-0 z-0 bg-black opacity-50"></div>
         {/* iPhone Frame (Visible when zooming out) */}
         <IPhoneFrame scale={scale} showNavbar={showNavbar} />
         {/* 🏆 NAVBAR (Animated Fade-In & Slide-Down) */}

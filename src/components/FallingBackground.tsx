@@ -13,7 +13,7 @@ const FallingBackground: React.FC<FallingBackgroundProps> = ({ scrollY }) => {
       {[...Array(30)].map((_, i) => (
         <div
           key={i}
-          className="absolute top-0 w-[2px] h-[100vh] bg-[#98c379]"
+          className="absolute top-0 h-[100vh] w-[2px] bg-[#98c379]"
           style={{
             left: `${Math.random() * 100}vw`, // Random horizontal position
             animation: `fallAnimation ${

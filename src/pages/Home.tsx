@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FallingBackground from "../components/FallingBackground";
 import IPhoneFrame from "../components/IPhoneFrame";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 // import { AnimatePresence } from "framer-motion";
 // import { AnimatedButton } from "../components/Button";
 
@@ -79,6 +80,8 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   const [scale, setScale] = useState(1);
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+
   // check for type of device
   let scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
 
@@ -102,22 +105,24 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log("🚀 ~ Home ~ showNavbar:", showNavbar);
+
+  console.log("🚀 ~ Home ~ showSidebar:", showSidebar);
 
   return (
-    <>
+    <div className={`relative min-h-[110vh] w-screen bg-[#4d4d4d]`}>
       {/* Navbar Component */}
-      <Navbar showNavbar={showNavbar} />
-      <div
-        className={`relative min-h-[100vh] w-screen overflow-hidden bg-[#4d4d4d]`}
-      >
-        {/* Falling Lines Background */}
-        <FallingBackground scrollY={scrollY * 0.5} />
-        <div className="fixed inset-0 z-0 bg-black opacity-50"></div>
-        {/* iPhone Frame (Visible when zooming out) */}
-        <IPhoneFrame scale={scale} showNavbar={showNavbar} />
-        {/* 🏆 NAVBAR (Animated Fade-In & Slide-Down) */}
-      </div>
-    </>
+      <Navbar
+        showNavbar={showNavbar}
+        setShowSidebar={setShowSidebar}
+        showSidebar={showSidebar}
+      />
+      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+
+      {/* Falling Lines Background */}
+      <FallingBackground scrollY={scrollY * 0.5} />
+      {/* iPhone Frame (Visible when zooming out) */}
+      <IPhoneFrame scale={scale} showNavbar={showNavbar} />
+      {/* 🏆 NAVBAR (Animated Fade-In & Slide-Down) */}
+    </div>
   );
 }

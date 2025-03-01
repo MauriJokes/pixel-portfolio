@@ -3,15 +3,20 @@ import { RiMenu3Fill } from "react-icons/ri";
 
 interface NavbarProps {
   showNavbar: boolean;
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+  showSidebar: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ showNavbar }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  showNavbar,
+  setShowSidebar,
+  showSidebar,
+}) => {
   return (
     <motion.nav
       className="sticky top-0 left-0 z-40 flex h-[70px] w-full bg-[linear-gradient(to_bottom_right,#e06c75,#e5c07b,#98c379,#61afef,#c678dd,#e06c75)] shadow-md shadow-black/20 backdrop-blur-md"
       animate={{
-        // y: showNavbar ? 25 : 0, // Moves down with navbar
-        opacity: showNavbar ? 1 : 0, // Fade in when needed
+        y: showNavbar ? 0 : -100, // Move navbar off-screen instead of hiding it
       }}
       transition={{
         duration: 0.5,
@@ -30,7 +35,12 @@ const Navbar: React.FC<NavbarProps> = ({ showNavbar }) => {
             FULL STACK DEVELOPER
           </p>
         </div>
-        <RiMenu3Fill className="text-3xl text-white" />
+        {!showSidebar && (
+          <RiMenu3Fill
+            className="cursor-pointer text-3xl text-white"
+            onClick={() => setShowSidebar(!showSidebar)}
+          />
+        )}
       </div>
       {/* <p className="text-xl font-semibold tracking-wider">MY PORTFOLIO</p> */}
     </motion.nav>

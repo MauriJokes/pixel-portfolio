@@ -15,7 +15,7 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
       id="phoneFrame"
       className="fixed inset-0 z-10 flex items-center justify-center"
       animate={{
-        y: showNavbar ? 25 : 0, // Moves down with navbar
+        y: showNavbar ? 40 : 0, // Moves down with navbar
         scale: scale,
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}

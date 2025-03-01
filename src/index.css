@@ -19,21 +19,6 @@
   }
 }
 
-/* Fonts */
-@font-face {
-  font-family: "Brick Sans";
-  src: url("/fonts/NTBrickSans.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat-VariableFont_wght.ttf") format(truetype);
-  font-weight: normal;
-  font-style: normal;
-}
-
 .bg-gradient-move {
   position: absolute;
   width: 100%;
@@ -52,6 +37,28 @@
   animation: gradient-scroll 5s linear infinite;
 }
 
+/* Fonts */
+@font-face {
+  font-family: "Brick Sans";
+  src: url("/fonts/NTBrickSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-VariableFont_wght.ttf") format(truetype);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JetBrains";
+  src: url("/fonts/JetBrainsMono-Regular.ttf") format(truetype);
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Apply it globally (optional) */
 .font-brick-sans {
   font-family: "Brick Sans", sans-serif;
@@ -59,4 +66,8 @@
 
 .font-montserrat {
   font-family: "Montserrat", classic;
+}
+
+.font-jet-brains {
+  font-family: "JetBrains", sans-serif;
 }

@@ -4,7 +4,7 @@ interface FallingBackgroundProps {
 
 const FallingBackground: React.FC<FallingBackgroundProps> = ({ scrollY }) => {
   return (
-    <div className="absolute inset-0 z-0 h-full w-full overflow-hidden bg-[#262626]">
+    <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
       <div
         className="relative inset-0 z-0"
         style={{

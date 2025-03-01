@@ -1,18 +1,73 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface IPhoneFrameProps {
   scale: number;
   showNavbar: boolean;
 }
 
+interface TitleComponentProps {
+  label: string;
+  textColor: string;
+}
+
+const words = [
+  "FULL STACK DEVELOPER",
+  "SOFTWARE ENGINEER",
+  "SOLUTION ARCHITECT",
+  "CLOUD EXPLORER",
+  "DEVOPS LEARNER",
+  "SYSTEM BUILDER",
+  "API SPECIALIST",
+  "CODE OPTIMIZER",
+  "CODE CRAFTSMAN",
+  "VISIONARY CODER",
+  "DEBUGGER",
+  "PROBLEM SOLVER",
+  "TECH ENTHUSIAST",
+  "PERFORMANCE TWEAKER",
+  "TECH STORYTELLER",
+  "CONTINUOUS LEARNER",
+];
+
+const titleConfigs = [
+  {
+    label: "NIK",
+    textColor: "text-white",
+  },
+  {
+    label: "ADAM",
+    textColor: "text-[#98c379]",
+  },
+  {
+    label: "DANISH",
+    textColor: "text-white",
+  },
+];
+
+const TitleComponent: React.FC<TitleComponentProps> = ({
+  label,
+  textColor,
+}) => {
+  return (
+    <p className={`font-brick-sans text-center text-[68px] ${textColor}`}>
+      {label}
+    </p>
+  );
+};
+
 const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <motion.div
-      //   className="fixed inset-0 flex items-center justify-center z-10"
-      //   style={{
-      //     transform: `translateY(${translateY + phoneOffset}px) scale(${scale})`,
-      //   }}
-      id="phoneFrame"
       className="fixed inset-0 z-10 flex items-center justify-center"
       animate={{
         y: showNavbar ? 40 : 0, // Moves down with navbar
@@ -39,18 +94,28 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
               ))}
             </div>
             {/* Text Content */}
-            <div className="fixed z-10 flex flex-col items-center">
-              <p className="font-brick-sans text-center text-6xl text-white">
-                NIK
-              </p>
-              <p className="font-brick-sans text-center text-6xl text-[#98c379]">
-                ADAM
-              </p>
-              <p className="font-brick-sans text-center text-6xl text-white">
-                DANISH
-              </p>
-              <p className="font-montserrat mt-3 text-center text-sm font-semibold tracking-widest text-white">
-                FULL STACK DEVELOPER
+            <div className="fixed z-10 flex flex-col items-center leading-none">
+              {titleConfigs.map((item) => (
+                <TitleComponent label={item.label} textColor={item.textColor} />
+              ))}
+              <p className="font-montserrat relative mt-4 flex h-10 w-80 items-center justify-center overflow-hidden text-center text-[17px] font-semibold tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={index}
+                    initial={{ y: "100%", opacity: 0 }} // Start below & invisible
+                    animate={{ y: "0%", opacity: 1 }} // Move to center & fade in
+                    exit={{ y: "-100%", opacity: 0 }} // Move up & fade out
+                    transition={{
+                      duration: 0.2,
+                      ease: "easeOut",
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    className="absolute w-full"
+                  >
+                    {words[index]}
+                  </motion.div>
+                </AnimatePresence>
               </p>
             </div>
           </div>

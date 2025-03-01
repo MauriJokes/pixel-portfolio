@@ -106,23 +106,23 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log("🚀 ~ Home ~ showSidebar:", showSidebar);
-
   return (
-    <div className={`relative min-h-[110vh] w-screen bg-[#4d4d4d]`}>
+    <div className={`relative min-h-[110vh] w-screen bg-[#262626]`}>
       {/* Navbar Component */}
       <Navbar
         showNavbar={showNavbar}
         setShowSidebar={setShowSidebar}
         showSidebar={showSidebar}
       />
-      <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-
+      <Sidebar
+        showSidebar={showSidebar}
+        setShowSidebar={setShowSidebar}
+        active={0}
+      />
       {/* Falling Lines Background */}
       <FallingBackground scrollY={scrollY * 0.5} />
       {/* iPhone Frame (Visible when zooming out) */}
       <IPhoneFrame scale={scale} showNavbar={showNavbar} />
-      {/* 🏆 NAVBAR (Animated Fade-In & Slide-Down) */}
     </div>
   );
 }

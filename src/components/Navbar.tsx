@@ -42,7 +42,6 @@ const Navbar: React.FC<NavbarProps> = ({
           />
         )}
       </div>
-      {/* <p className="text-xl font-semibold tracking-wider">MY PORTFOLIO</p> */}
     </motion.nav>
   );
 };

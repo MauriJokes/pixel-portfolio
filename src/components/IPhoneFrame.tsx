@@ -9,6 +9,7 @@ interface IPhoneFrameProps {
 interface TitleComponentProps {
   label: string;
   textColor: string;
+  index: number;
 }
 
 const words = [
@@ -48,9 +49,13 @@ const titleConfigs = [
 const TitleComponent: React.FC<TitleComponentProps> = ({
   label,
   textColor,
+  index,
 }) => {
   return (
-    <p className={`font-brick-sans text-center text-[68px] ${textColor}`}>
+    <p
+      key={`p${index}`}
+      className={`font-brick-sans text-center text-[68px] ${textColor}`}
+    >
       {label}
     </p>
   );
@@ -95,10 +100,14 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
             </div>
             {/* Text Content */}
             <div className="fixed z-10 flex flex-col items-center leading-none">
-              {titleConfigs.map((item) => (
-                <TitleComponent label={item.label} textColor={item.textColor} />
+              {titleConfigs.map((item, index) => (
+                <TitleComponent
+                  label={item.label}
+                  textColor={item.textColor}
+                  index={index}
+                />
               ))}
-              <p className="font-montserrat relative mt-4 flex h-10 w-80 items-center justify-center overflow-hidden text-center text-[17px] font-semibold tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
+              <span className="font-montserrat relative mt-4 flex h-10 w-80 items-center justify-center overflow-hidden text-center text-[17px] font-semibold tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
                 <AnimatePresence mode="popLayout">
                   <motion.div
                     key={index}
@@ -116,7 +125,7 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
                     {words[index]}
                   </motion.div>
                 </AnimatePresence>
-              </p>
+              </span>
             </div>
           </div>
         </div>

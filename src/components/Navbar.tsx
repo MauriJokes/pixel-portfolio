@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { RiMenu3Fill } from "react-icons/ri";
+import { useLayout } from "../context/LayoutContext";
 
 interface NavbarProps {
   showNavbar: boolean;
@@ -7,14 +8,11 @@ interface NavbarProps {
   showSidebar: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({
-  showNavbar,
-  setShowSidebar,
-  showSidebar,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ showNavbar }) => {
+  const { showSidebar, setShowSidebar } = useLayout();
   return (
     <motion.nav
-      className="sticky top-0 left-0 z-40 flex h-[70px] w-full bg-[linear-gradient(to_bottom_right,#e06c75,#e5c07b,#98c379,#61afef,#c678dd,#e06c75)] shadow-md shadow-black/20 backdrop-blur-md"
+      className="fixed top-0 left-0 z-40 flex h-16 w-full bg-[linear-gradient(to_bottom_right,#e06c75,#e5c07b,#98c379,#61afef,#c678dd,#e06c75)] shadow-md shadow-black/20 backdrop-blur-md"
       animate={{
         y: showNavbar ? 0 : -100, // Move navbar off-screen instead of hiding it
       }}

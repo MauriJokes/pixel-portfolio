@@ -5,18 +5,21 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { TbMailFilled } from "react-icons/tb";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLayout } from "../context/LayoutContext";
 
 interface SidebarProps {
   showSidebar: boolean;
   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-  active: number;
 }
 
 interface SidebarNavProps {
   label: string;
   nav: string;
   active: number;
+  setActive: React.Dispatch<React.SetStateAction<number>>;
   index: number;
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowNavbar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SidebarNavConfigs = [
@@ -42,25 +45,32 @@ const SidebarNavs: React.FC<SidebarNavProps> = ({
   label,
   nav,
   active,
+  setActive,
   index,
+  setShowSidebar,
+  setShowNavbar,
 }) => {
   const navigate = useNavigate();
   return (
     <div
+      key={index}
       className={`font-jet-brains cursor-pointer text-base transition duration-300 ${active === index ? "text-[#98c379]" : "text-white"} `}
-      onClick={() => navigate(nav)}
+      onClick={() => {
+        navigate(nav),
+          setShowSidebar(false),
+          setShowNavbar(index === 0 ? false : true),
+          setActive(index);
+      }}
     >
       {label}
     </div>
   );
 };
 
-const Sidebar: React.FC<SidebarProps> = ({
-  showSidebar,
-  setShowSidebar,
-  active,
-}) => {
+const Sidebar: React.FC<SidebarProps> = () => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const { showSidebar, setShowSidebar, setShowNavbar, setActive, active } =
+    useLayout();
   const email = "nikadamdanish@gmail.com";
 
   const copyToClipboard = () => {
@@ -70,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <motion.nav
+    <motion.aside
       className="fixed top-0 right-0 z-50 h-full w-60 border border-l-black bg-black/60 p-4 shadow-md shadow-black/20 backdrop-blur-md"
       animate={{
         x: showSidebar ? 0 : 250, // Move navbar off-screen instead of hiding it
@@ -94,7 +104,10 @@ const Sidebar: React.FC<SidebarProps> = ({
               label={item.label}
               nav={item.nav}
               active={active}
+              setActive={setActive}
               index={index}
+              setShowSidebar={setShowSidebar}
+              setShowNavbar={setShowNavbar}
             />
           ))}
         </div>
@@ -127,7 +140,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </a>
         </div>
       </div>
-    </motion.nav>
+    </motion.aside>
   );
 };
 

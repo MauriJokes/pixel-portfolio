@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import FallingBackground from "../components/FallingBackground";
 import IPhoneFrame from "../components/IPhoneFrame";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import { useLayout } from "../context/LayoutContext";
 // import { AnimatePresence } from "framer-motion";
 // import { AnimatedButton } from "../components/Button";
 
@@ -79,8 +78,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const [scale, setScale] = useState(1);
-  const [showNavbar, setShowNavbar] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
+  const { setShowNavbar, showNavbar } = useLayout();
 
   // check for type of device
   let scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
@@ -107,18 +105,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={`relative min-h-[110vh] w-screen bg-[#262626]`}>
-      {/* Navbar Component */}
-      <Navbar
-        showNavbar={showNavbar}
-        setShowSidebar={setShowSidebar}
-        showSidebar={showSidebar}
-      />
-      <Sidebar
-        showSidebar={showSidebar}
-        setShowSidebar={setShowSidebar}
-        active={0}
-      />
+    <div className="relative min-h-[110vh] w-screen bg-[#262626]">
       {/* Falling Lines Background */}
       <FallingBackground scrollY={scrollY * 0.5} />
       {/* iPhone Frame (Visible when zooming out) */}

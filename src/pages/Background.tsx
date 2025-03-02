@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import FilterButtons from "../components/FilterButtons";
 import data from "../data/background-info.json";
-import TypewriterComponent from "../components/TypwriterComponent";
+import BackgroundAudioPlayer from "../components/BackgroundAudioPlayer";
 
 const ButtonConfigs = [
   {
@@ -18,7 +16,6 @@ const ButtonConfigs = [
 ];
 
 export default function Background() {
-  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [active, setActive] = useState<number>(0);
   const [textColor, setTextColor] = useState<string>("text-[#e06c75]");
   const [textInfo, setTextInfo] = useState<string>(data[0].text);
@@ -44,19 +41,7 @@ export default function Background() {
   }, [active]);
 
   return (
-    <div className={`h-screen w-screen bg-[#262626]`}>
-      {/* Navbar Component */}
-      <Navbar
-        showNavbar={true}
-        setShowSidebar={setShowSidebar}
-        showSidebar={showSidebar}
-      />
-      {/* Sidebar Component */}
-      <Sidebar
-        showSidebar={showSidebar}
-        setShowSidebar={setShowSidebar}
-        active={1}
-      />
+    <div className="h-screen w-screen bg-[#262626] pt-16">
       <div className="flex w-full flex-col items-center gap-6 overflow-hidden p-4">
         <div className="flex w-full items-center gap-2 overflow-hidden">
           {/* Filter Component */}
@@ -72,8 +57,8 @@ export default function Background() {
           })}
         </div>
 
-        {/* Textarea Component */}
-        <TypewriterComponent
+        {/* Background Audio Player Component */}
+        <BackgroundAudioPlayer
           data={textInfo}
           textColor={textColor}
           active={active}

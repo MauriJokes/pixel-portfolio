@@ -5,13 +5,13 @@ import { IoPauseCircleSharp } from "react-icons/io5";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import React from "react";
 
-interface TypewriterComponentProps {
+interface BackgroundAudioPlayerProps {
   data: string;
   textColor: string;
   active: number;
 }
 
-const TypewriterComponent: React.FC<TypewriterComponentProps> = ({
+const BackgroundAudioPlayer: React.FC<BackgroundAudioPlayerProps> = ({
   data,
   textColor,
   active,
@@ -108,4 +108,4 @@ const TypewriterComponent: React.FC<TypewriterComponentProps> = ({
   );
 };
 
-export default TypewriterComponent;
+export default BackgroundAudioPlayer;

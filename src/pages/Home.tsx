@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FallingBackground from "../components/FallingBackground";
 import IPhoneFrame from "../components/IPhoneFrame";
 import { useLayout } from "../context/LayoutContext";
+import React from "react";
 // import { AnimatePresence } from "framer-motion";
 // import { AnimatedButton } from "../components/Button";
 
@@ -105,11 +106,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-[110vh] w-screen bg-[#262626]">
+    <React.Fragment>
       {/* Falling Lines Background */}
       <FallingBackground scrollY={scrollY * 0.5} />
       {/* iPhone Frame (Visible when zooming out) */}
       <IPhoneFrame scale={scale} showNavbar={showNavbar} />
-    </div>
+    </React.Fragment>
   );
 }

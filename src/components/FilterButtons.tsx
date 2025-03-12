@@ -13,7 +13,7 @@ const FilterButtons: React.FC<FitlerButtonsProps> = ({
 }) => {
   return (
     <button
-      className={`mont-montserrat h-10 w-28 flex-1 rounded-lg text-sm shadow-lg shadow-gray-800/40 ${active === index ? "border border-white/50 bg-black text-white transition duration-300" : "bg-[#2e2e2e] text-[#969696]"}`}
+      className={`font-montserrat h-10 w-28 flex-1 rounded-lg text-sm tracking-widest ${active === index ? "border border-white/50 bg-black text-white shadow-lg transition duration-300" : "bg-[#2e2e2e] text-[#969696] shadow-lg"}`}
       onClick={() => setActive(index)}
     >
       {label}

@@ -41,29 +41,27 @@ export default function Background() {
   }, [active]);
 
   return (
-    <div className="h-screen w-screen bg-[#262626] pt-16">
-      <div className="flex w-full flex-col items-center gap-6 overflow-hidden p-4">
-        <div className="flex w-full items-center gap-2 overflow-hidden">
-          {/* Filter Component */}
-          {ButtonConfigs.map((item, index) => {
-            return (
-              <FilterButtons
-                active={active}
-                setActive={setActive}
-                label={item.label}
-                index={index}
-              />
-            );
-          })}
-        </div>
-
-        {/* Background Audio Player Component */}
-        <BackgroundAudioPlayer
-          data={textInfo}
-          textColor={textColor}
-          active={active}
-        />
+    <div className="flex h-full w-full flex-col items-center justify-start gap-6 overflow-hidden p-20 px-4">
+      <div className="flex w-full items-center gap-2 overflow-hidden">
+        {/* Filter Component */}
+        {ButtonConfigs.map((item, index) => {
+          return (
+            <FilterButtons
+              active={active}
+              setActive={setActive}
+              label={item.label}
+              index={index}
+            />
+          );
+        })}
       </div>
+
+      {/* Background Audio Player Component */}
+      <BackgroundAudioPlayer
+        data={textInfo}
+        textColor={textColor}
+        active={active}
+      />
     </div>
   );
 }

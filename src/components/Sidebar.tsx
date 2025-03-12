@@ -36,6 +36,10 @@ const SidebarNavConfigs = [
     nav: "/skills",
   },
   {
+    label: "<projects>",
+    nav: "/projects",
+  },
+  {
     label: "<contact>",
     nav: "/contact",
   },

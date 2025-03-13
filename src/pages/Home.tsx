@@ -80,35 +80,39 @@ import React from "react";
 export default function Home() {
   const [scale, setScale] = useState(1);
   const { setShowNavbar, showNavbar } = useLayout();
-
-  // check for type of device
-  let scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // Prevents SSR issues
+
+    // check for type of device
+    const scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
+
     const handleScroll = () => {
-      const scrollY = window.scrollY * scrollFactor;
+      const newScrollY = window.scrollY * scrollFactor;
+      setScrollY(newScrollY); // Save scroll position
+
       const maxScroll = window.innerHeight * 1.5; // Max scroll height before stopping
-      // Scale (Zoom-out effect, shrinks more now)
-      const newScale = Math.max(0.3, 1 - scrollY / (maxScroll * 0.7));
+      const newScale = Math.min(
+        Math.max(0.6, 1 - newScrollY / (maxScroll * 0.6)),
+        1.2,
+      );
+      // Clamped between 0.7 and 1.2 for smoother zoom-out
 
       setScale(newScale);
 
-      // Show navbar when max scroll is reached
-      if (scrollY >= maxScroll - 800) {
-        setShowNavbar(true);
-      } else {
-        setShowNavbar(false);
-      }
+      setShowNavbar(newScrollY >= maxScroll - 900);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [setShowNavbar]); // Added `setShowNavbar` dependency
 
   return (
     <React.Fragment>
       {/* Falling Lines Background */}
       <FallingBackground scrollY={scrollY * 0.5} />
+
       {/* iPhone Frame (Visible when zooming out) */}
       <IPhoneFrame scale={scale} showNavbar={showNavbar} />
     </React.Fragment>

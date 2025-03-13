@@ -3,8 +3,7 @@ import { useLayout } from "../context/LayoutContext";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
-// import Navbar from "./Navbar";
-// import Sidebar from "./Sidebar";
+import { FaRegCopyright } from "react-icons/fa";
 
 const Layout: React.FC = () => {
   const { showSidebar, setShowSidebar, showNavbar } = useLayout();
@@ -24,10 +23,18 @@ const Layout: React.FC = () => {
           className={
             isHomePage
               ? "relative min-h-[110vh] w-screen bg-[#262626]"
-              : "h-screen w-screen bg-[#262626]"
+              : "h-full w-screen bg-[#262626]"
           }
         >
           <Outlet /> {/* This renders child routes */}
+          {!isHomePage && (
+            <div className="bottom-0 mb-4 flex items-center justify-center gap-2">
+              <FaRegCopyright className="text-xs text-white/60" />
+              <p className="font-montserrat text-xs tracking-widest text-white/60">
+                2025 Nik Adam Danish
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

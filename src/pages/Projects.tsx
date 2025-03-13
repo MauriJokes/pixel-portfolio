@@ -41,7 +41,7 @@ const ExpandableCardList = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden p-20 px-4">
+    <div className="flex h-screen w-full flex-col items-center justify-start overflow-hidden p-20 px-4">
       {["blue", "yellow", "red"].map((color, index) => (
         <motion.div
           key={index}

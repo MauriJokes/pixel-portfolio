@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { FaAngleDown } from "react-icons/fa";
 
 interface IPhoneFrameProps {
   scale: number;
@@ -61,6 +62,24 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
   );
 };
 
+function AnimatedArrow() {
+  return (
+    <div className="fixed bottom-10 left-1/2 flex -translate-x-1/2 transform items-center justify-center">
+      {/* Outer Pulsing Circle */}
+      <motion.div
+        className="absolute h-24 w-24 rounded-full bg-white opacity-50"
+        animate={{ scale: [0.8, 1.2, 0.8], opacity: [0, 0.5, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+
+      {/* Inner Arrow Circle */}
+      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-white">
+        <FaAngleDown className="text-2xl text-[#98c379]" />
+      </div>
+    </div>
+  );
+}
+
 const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
   const [index, setIndex] = useState(0);
 
@@ -82,7 +101,7 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
     >
       <div className="relative flex min-h-screen items-center justify-center">
         {/* iPhone Frame */}
-        <div className="relative h-[750px] w-[380px] overflow-hidden rounded-[50px] border-[15px] border-black bg-white shadow-lg">
+        <div className="relative h-[110vh] w-[110vw] overflow-hidden rounded-[50px] border-[15px] border-black bg-white shadow-lg">
           {/* Notch */}
           <div className="absolute top-1 left-1/2 z-10 h-[30px] w-[160px] -translate-x-1/2 rounded-full bg-black"></div>
           {/* Content inside the iPhone */}
@@ -126,6 +145,9 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
                   </motion.div>
                 </AnimatePresence>
               </span>
+            </div>
+            <div>
+              <AnimatedArrow />
             </div>
           </div>
         </div>

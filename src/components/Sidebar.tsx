@@ -78,11 +78,26 @@ const Sidebar: React.FC<SidebarProps> = () => {
   const email = "nikadamdanish@gmail.com";
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(email);
-    setShowTooltip(true);
-    setTimeout(() => setShowTooltip(false), 2000); // Hide after 1.5s
-  };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(() => {
+        setShowTooltip(true);
+        setTimeout(() => setShowTooltip(false), 2000);
+      });
+    } else {
+      // Fallback for iOS / unsupported browsers
+      const textarea = document.createElement("textarea");
+      textarea.value = email;
+      textarea.style.position = "absolute";
+      textarea.style.left = "-9999px"; // Move it off-screen
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
 
+      setShowTooltip(true);
+      setTimeout(() => setShowTooltip(false), 2000);
+    }
+  };
   return (
     <motion.aside
       className="fixed top-0 right-0 z-50 h-full w-60 border border-l-black bg-black/60 p-4 shadow-md shadow-black/20 backdrop-blur-md"

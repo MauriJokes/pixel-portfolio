@@ -41,7 +41,7 @@ export default function Background() {
   }, [active]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-start gap-6 overflow-hidden p-20 px-4">
+    <div className="flex h-screen w-full flex-col items-center justify-start gap-6 overflow-hidden p-20 px-4">
       <div className="flex w-full items-center gap-2 overflow-hidden">
         {/* Filter Component */}
         {ButtonConfigs.map((item, index) => {

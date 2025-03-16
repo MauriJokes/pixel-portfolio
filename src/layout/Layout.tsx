@@ -4,11 +4,14 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
 import { FaRegCopyright } from "react-icons/fa";
+import moment from "moment";
 
 const Layout: React.FC = () => {
   const { showSidebar, setShowSidebar, showNavbar } = useLayout();
   const location = useLocation();
   const isHomePage = location.pathname === "/"; // Change this to your specific route
+  const currentYear = moment().year();
+  console.log("🚀 ~ currentYear:", currentYear);
 
   return (
     <div className="flex">
@@ -31,7 +34,7 @@ const Layout: React.FC = () => {
             <div className="bottom-0 mb-4 flex items-center justify-center gap-2">
               <FaRegCopyright className="text-xs text-white/60" />
               <p className="font-montserrat text-xs tracking-widest text-white/60">
-                2025 Nik Adam Danish
+                {currentYear} Nik Adam Danish
               </p>
             </div>
           )}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FallingBackground from "../components/FallingBackground";
 import IPhoneFrame from "../components/IPhoneFrame";
+import LaptopFrame from "../components/LaptopFrame";
 import { useLayout } from "../context/LayoutContext";
 import React from "react";
 // import { AnimatePresence } from "framer-motion";
@@ -114,7 +115,16 @@ export default function Home() {
       <FallingBackground scrollY={scrollY * 0.5} />
 
       {/* iPhone Frame (Visible when zooming out) */}
-      <IPhoneFrame scale={scale} showNavbar={showNavbar} />
+      {/* Hidden by default, only shown on specific breakpoints */}
+      <div className="block sm:hidden">
+        <IPhoneFrame scale={scale} showNavbar={showNavbar} />
+      </div>
+      {/* <div className="hidden sm:block lg:hidden">
+        <TabletComponent />
+      </div> */}
+      <div className="hidden lg:block">
+        <LaptopFrame scale={scale} showNavbar={showNavbar} />
+      </div>
     </React.Fragment>
   );
 }

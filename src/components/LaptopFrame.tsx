@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { FaAngleDown } from "react-icons/fa";
 import GridOverlay from "./GridOverlay";
-import { FaChevronDown } from "react-icons/fa";
 import ChevronAnimation from "./ChevronAnimation";
 
-interface IPhoneFrameProps {
+interface LaptopFrameProps {
   scale: number;
   showNavbar: boolean;
 }
@@ -64,7 +64,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
   );
 };
 
-const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
+const LaptopFrame: React.FC<LaptopFrameProps> = ({ scale, showNavbar }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -103,7 +103,6 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
                   index={index}
                 />
               ))}
-              {/* Wheel Description */}
               <span className="font-montserrat relative mt-4 flex h-10 w-80 items-center justify-center overflow-hidden text-center text-[17px] font-semibold tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
                 <AnimatePresence mode="popLayout">
                   <motion.div
@@ -135,4 +134,4 @@ const IPhoneFrame: React.FC<IPhoneFrameProps> = ({ scale, showNavbar }) => {
   );
 };
 
-export default IPhoneFrame;
+export default LaptopFrame;

@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import GridOverlay from "./GridOverlay";
-import { FaChevronDown } from "react-icons/fa";
 import ChevronAnimation from "./ChevronAnimation";
 
 interface IPhoneFrameProps {

@@ -80,17 +80,17 @@ import React from "react";
 
 export default function Home() {
   const [scale, setScale] = useState(1);
-  const { setShowNavbar, showNavbar } = useLayout();
   const [scrollY, setScrollY] = useState(0);
+  const { setShowNavbar, showNavbar } = useLayout();
 
   useEffect(() => {
     if (typeof window === "undefined") return; // Prevents SSR issues
 
     // check for type of device
-    const scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 1;
+    // const scrollFactor = window.matchMedia("(pointer: coarse)").matches ? 3 : 3;
 
     const handleScroll = () => {
-      const newScrollY = window.scrollY * scrollFactor;
+      const newScrollY = window.scrollY * 6;
       setScrollY(newScrollY); // Save scroll position
 
       const maxScroll = window.innerHeight * 1.5; // Max scroll height before stopping

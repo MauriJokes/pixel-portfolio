@@ -59,6 +59,26 @@
   font-style: normal;
 }
 
+/* Buttons */
+
+.button-gradient {
+  @apply transform rounded-full border-6 border-black px-12 py-6 font-bold text-white uppercase transition active:scale-95;
+  @apply shadow-[4px_4px_0px_rgba(0,0,0,0.8)];
+}
+
+.signup {
+  @apply bg-gradient-to-r from-[#e5c07b] to-[#e06c75];
+}
+.login {
+  @apply bg-gradient-to-r from-blue-500 to-purple-500;
+}
+.play {
+  @apply bg-gradient-to-r from-teal-500 to-blue-500;
+}
+.settings {
+  @apply bg-gradient-to-r from-blue-500 to-indigo-500;
+}
+
 /* Apply it globally (optional) */
 .font-brick-sans {
   font-family: "Brick Sans", sans-serif;
